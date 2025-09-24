@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coders.ia.br/sitemap-index.xml

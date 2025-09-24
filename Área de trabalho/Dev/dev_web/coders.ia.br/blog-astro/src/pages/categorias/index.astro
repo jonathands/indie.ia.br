@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { Archive } from 'lucide-astro';
+
+// Get all published blog posts with dates in the past
+const allPosts = await getCollection('blog', ({ data }) => {
+  const now = new Date();
+  return data.draft !== true && data.date <= now;
+});
+
+// Get categories with post count
+const categoryMap = new Map();
+
+allPosts.forEach(post => {
+  const category = post.data.category;
+  if (categoryMap.has(category)) {
+    categoryMap.set(category, categoryMap.get(category) + 1);
+  } else {
+    categoryMap.set(category, 1);
+  }
+});
+
+const categories = Array.from(categoryMap.entries()).map(([name, count]) => ({
+  name,
+  count,
+  slug: name.toLowerCase().replace(/\s+/g, '-'),
+  // Get latest post from this category
+  latestPost: allPosts
+    .filter(post => post.data.category === name)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0]
+})).sort((a, b) => b.count - a.count); // Sort by post count
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('pt-BR', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+function getCategoryColor(category: string) {
+  const colors = [
+    'bg-red-500', 'bg-orange-500', 'bg-amber-500', 'bg-yellow-500',
+    'bg-lime-500', 'bg-green-500', 'bg-emerald-500', 'bg-teal-500',
+    'bg-cyan-500', 'bg-sky-500', 'bg-blue-500', 'bg-indigo-500',
+    'bg-violet-500', 'bg-purple-500', 'bg-fuchsia-500', 'bg-pink-500',
+    'bg-rose-500'
+  ];
+
+  const firstChar = category.charAt(0).toLowerCase().charCodeAt(0);
+  const lastChar = category.charAt(category.length - 1).toLowerCase().charCodeAt(0);
+  const colorIndex = (firstChar + lastChar) % colors.length;
+
+  return colors[colorIndex];
+}
+---
+
+<BaseLayout
+  title="Categorias - Coders.ia.br"
+  description="Explore nossos artigos organizados por categorias: desenvolvimento web, inteligência artificial, ferramentas e muito mais."
+>
+  <div class="container mx-auto px-4 py-8">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+        Categorias
+      </h1>
+      <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+        Explore nossos artigos organizados por temas. Encontre exatamente o que você está procurando.
+      </p>
+      <div class="w-24 h-1 bg-gradient-to-r from-accent-500 to-primary-500 mx-auto mt-6 rounded-full"></div>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="flex flex-wrap justify-center gap-4">
+      {categories.map((category) => (
+        <a
+          href={`/categorias/${category.slug}`}
+          class="group relative overflow-hidden bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-accent-500/50 rounded-xl px-6 py-4 transition-all duration-300 hover:shadow-lg hover:shadow-accent-500/10"
+        >
+          <div class="flex items-center space-x-3">
+            <div class={`w-3 h-3 ${getCategoryColor(category.name)} rounded-full group-hover:scale-110 transition-transform duration-200`}></div>
+            <span class="text-white font-medium group-hover:text-accent-400 transition-colors duration-200">
+              {category.name}
+            </span>
+            <span class="text-xs text-slate-400 bg-slate-700 px-2 py-1 rounded-full">
+              {category.count}
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Empty State -->
+    {categories.length === 0 && (
+      <div class="text-center py-16">
+        <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
+          <Archive class="w-12 h-12 text-slate-500" />
+        </div>
+        <h2 class="text-2xl font-semibold text-white mb-2">Nenhuma categoria encontrada</h2>
+        <p class="text-slate-400">Parece que ainda não temos posts publicados.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { User, Calendar, Linkedin, MessageCircle } from 'lucide-astro';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, category, author, image } = post.data;
+
+const formattedDate = date.toLocaleDateString('pt-BR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const shareUrl = encodeURIComponent(Astro.url.toString());
+const shareTitle = encodeURIComponent(title);
+const shareText = encodeURIComponent(description);
+
+const twitterUrl = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`;
+const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`;
+const whatsappUrl = `https://wa.me/?text=${shareTitle} ${shareUrl}`;
+---
+
+<BaseLayout title={title} description={description} image={image} type="article">
+  <article class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Breadcrumb -->
+    <nav class="mb-8 text-sm">
+      <ol class="flex items-center space-x-2 text-slate-400">
+        <li><a href="/" class="hover:text-accent-400 transition-colors">Home</a></li>
+        <li><span class="mx-2">/</span></li>
+        <li><a href={`/categorias/${category.toLowerCase()}`} class="hover:text-accent-400 transition-colors">{category}</a></li>
+        <li><span class="mx-2">/</span></li>
+        <li class="text-slate-300 truncate">{title}</li>
+      </ol>
+    </nav>
+
+    <!-- Post Header -->
+    <header class="mb-12 text-center">
+      <div class="mb-4">
+        <span class="inline-block px-3 py-1 text-xs font-medium text-accent-300 bg-accent-900/30 rounded-full border border-accent-800">
+          {category}
+        </span>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        {title}
+      </h1>
+
+      <p class="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+        {description}
+      </p>
+
+      <div class="flex items-center justify-center space-x-6 text-sm text-slate-400">
+        <div class="flex items-center space-x-2">
+          <User class="w-4 h-4" />
+          <span>{author}</span>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <Calendar class="w-4 h-4" />
+          <time datetime={date.toISOString()}>{formattedDate}</time>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <div class="prose prose-lg prose-invert max-w-none mx-auto">
+      <slot />
+    </div>
+
+    <!-- Share Buttons -->
+    <div class="mt-12 pt-8 border-t border-slate-800">
+      <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+        <h3 class="text-lg font-semibold text-white">Compartilhe este post</h3>
+
+        <div class="flex items-center space-x-4">
+          <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition-all duration-200"
+          >
+            <Linkedin class="w-4 h-4" />
+            <span class="hidden sm:inline">LinkedIn</span>
+          </a>
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition-all duration-200"
+          >
+            <MessageCircle class="w-4 h-4" />
+            <span class="hidden sm:inline">WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation to other posts could be added here -->
+  </article>
+</BaseLayout>

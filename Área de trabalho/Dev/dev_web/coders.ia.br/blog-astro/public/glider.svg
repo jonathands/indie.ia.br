@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created by Keith Packard -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   x="0"
+   y="0"
+   width="140"
+   height="140"
+   id="glider">
+   
+<g transform="translate(10,10)">>
+    <g id="scale" transform="scale(20,20)">
+	<g id="dots"
+	   style="fill:#400040"
+	   >
+		<ellipse cx="3" cy="1" rx=".7" ry=".7" id="C1" />
+		<ellipse cx="5" cy="3" rx=".7" ry=".7" id="C1" />
+		<ellipse cx="1" cy="5" rx=".7" ry=".7" id="C1" />
+		<ellipse cx="3" cy="5" rx=".7" ry=".7" id="C1" />
+		<ellipse cx="5" cy="5" rx=".7" ry=".7" id="C1" />
+	</g>
+    </g>
+</g>
+</svg>
