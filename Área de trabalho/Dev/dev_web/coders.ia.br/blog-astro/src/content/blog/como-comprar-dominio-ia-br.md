@@ -1,10 +1,10 @@
 ---
 title: "Como Comprar Seu Domínio .ia.br e .app.br"
-description: "Guia completo sobre como adquirir os novos domínios .ia.br e .app.br no Brasil, incluindo vantagens, desvantagens e considerações importantes para SEO e marketing digital."
+description: "Os novos domínios do NIC.BR na nova fronteira de IA no Brasil: registro, considerações para SEO e domain parking à brasileira."
 date: 2025-09-27
 category: "Infra"
 tags: ["domínios", "ia.br", "app.br", "registro.br", "SEO", "marketing digital"]
-author: "Coders.ia.br"
+author: "JonathanDS"
 draft: false
 ---
 
@@ -31,8 +31,9 @@ Depende, um domínio ia.br ou app.br para seu App, SaaS baseado em IA ou Mobile,
 
 ## Corrida do Ouro ou Ouro de tolo?
 
-Principalmente os domínios ia.br tiveram um volume alto de registros no dia de lançamento (1 de Agosto de 2025), nomes comuns como contabeis.ia.br, medicina.ia.br, inteligenc.ia.br, consultor.ia.br e até coisas como gato.ia.br, cachorro.ia.br foram rapidamente comprados, a imensa maioria deles se mantém sem uso e muitos desses domínios estão sendo vendidos em uma nova onda de "domain parking", ou estacionamento de domínio em bom português, que é essa prática de comprar domínios para revender a posteriori.
+O volume foi alto para os registros no dia de lançamento (1 de Agosto de 2025) dos novos domínios, principalmente os domínios ia.br, a página de estatísticas no NIC.BR [https://registro.br/dominio/estatisticas/](https://registro.br/dominio/estatisticas/) indica mais de 15.000 registros em menos de 30 dias.
 
+Nomes comuns como contabeis.ia.br, medicina.ia.br, inteligenc.ia.br, consultor.ia.br e até coisas como gato.ia.br, cachorro.ia.br foram rapidamente comprados, a imensa maioria deles se mantém sem uso e muitos desses domínios estão sendo vendidos em uma nova onda de "domain parking", ou estacionamento de domínio em bom português, que é essa prática de comprar domínios para revender a posteriori.
 
 ---
 *Última atualização: Outubro 2025*
