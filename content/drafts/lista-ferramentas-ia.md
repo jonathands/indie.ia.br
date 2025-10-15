@@ -12,3 +12,4 @@ ideavo.ai
 Dyad.sh
 CatDoes.com
 https://www.rocket.new/
+https://www.blackbox.ai/
