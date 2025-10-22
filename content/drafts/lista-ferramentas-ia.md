@@ -13,3 +13,6 @@ Dyad.sh
 CatDoes.com
 https://www.rocket.new/
 https://www.blackbox.ai/
+
+https://gelt.dev/
+https://www.jenova.ai/
